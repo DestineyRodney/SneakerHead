@@ -40,8 +40,25 @@ sneakers.forEach(function (sneaker){
 body.innerHTML = renderSneakers(filteredSneaker);
 }
 
+function searchByName (e){
+    e.preventDefault();
+    var sneakerNameInput = sneakerInput.value;
+    var filterSneakers = [];
+    sneakers.forEach(function (sneaker){
+        if(sneaker.name.toLowerCase() === sneakerNameInput.toLowerCase()){
+          filterSneakers.push(sneaker);
+        }
+    })
+    body.innerHTML = renderSneakers(filterSneakers);
+}
+
 var body = document.getElementById('sneakers');
 body.innerHTML = renderSneakers(sneakers);
 var submitButton = document.getElementById('submit');
 var selectedBrand = document.getElementById('brand');
 submitButton.addEventListener('click', searchByBrand);
+
+var sneakerInput = document.getElementById('input-name');
+var searchByNameBtn = document.getElementById('name-btn');
+
+searchByNameBtn.addEventListener('click', searchByName);
