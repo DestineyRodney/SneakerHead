@@ -44,10 +44,9 @@ if(selectedBrand.value === 'All'){
 }
 }
 
-function searchByName (e) {
-    e.preventDefault();
-    var sneakerNameInput = sneakerInput.value;
+function searchByName () {
     var filterSneakers = [];
+    var sneakerNameInput = sneakerInput.value;
     sneakers.forEach(function (sneaker) {
         if (sneaker.name.toLowerCase().includes(sneakerNameInput.toLowerCase())) {
             filterSneakers.push(sneaker);
@@ -95,7 +94,8 @@ submitButton.addEventListener('click', searchByBrand);
 var sneakerInput = document.getElementById('input-name');
 var searchByNameBtn = document.getElementById('name-btn');
 
-searchByNameBtn.addEventListener('keyup', searchByName);
+sneakerInput.addEventListener('input', searchByName);
+searchByNameBtn.addEventListener('click', searchByName);
 
 var newSneakerButton = document.getElementById('new-btn');
 newSneakerButton.addEventListener('click', addNewSneaker)
