@@ -32,12 +32,16 @@ function renderSneakers(sneakers){
 function searchByBrand(e){
     e.preventDefault();
 var filteredSneaker = [];
-sneakers.forEach(function (sneaker){
-    if(selectedBrand.value === sneaker.brand){
-        filteredSneaker.push(sneaker);
-    }
-});
-body.innerHTML = renderSneakers(filteredSneaker);
+if(selectedBrand.value === 'All'){
+    body.innerHTML = renderSneakers(sneakers);
+}else {
+    sneakers.forEach(function (sneaker) {
+        if (selectedBrand.value === sneaker.brand) {
+            filteredSneaker.push(sneaker);
+        }
+    });
+    body.innerHTML = renderSneakers(filteredSneaker);
+}
 }
 
 function searchByName (e) {
@@ -72,6 +76,12 @@ function addNewSneaker (e){
         console.log('already added')
     }else {
         sneakers.push(newSneaker);
+        var myObjectSerial = JSON.stringify(newSneaker);
+
+        localStorage.setItem('newSneakers', myObjectSerial);
+        var myDesteriallized = JSON.parse(localStorage.getItem('newSneakers'));
+        console.log(myDesteriallized);
+        console.log(localStorage);
     }
     body.innerHTML = renderSneakers(sneakers);
 }
