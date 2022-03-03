@@ -40,16 +40,40 @@ sneakers.forEach(function (sneaker){
 body.innerHTML = renderSneakers(filteredSneaker);
 }
 
-function searchByName (e){
+function searchByName (e) {
     e.preventDefault();
     var sneakerNameInput = sneakerInput.value;
     var filterSneakers = [];
-    sneakers.forEach(function (sneaker){
-        if(sneaker.name.toLowerCase() === sneakerNameInput.toLowerCase()){
-          filterSneakers.push(sneaker);
+    sneakers.forEach(function (sneaker) {
+        if (sneaker.name.toLowerCase().includes(sneakerNameInput.toLowerCase())) {
+            filterSneakers.push(sneaker);
         }
     })
     body.innerHTML = renderSneakers(filterSneakers);
+}
+
+var myObjectSeriallized = JSON.stringify(sneakers);
+localStorage.setItem('mySneakers', myObjectSeriallized);
+console.log(localStorage);
+
+var myObjectDesteriallized = JSON.parse(localStorage.getItem('mySneakers'));
+console.log(myObjectDesteriallized);
+
+function addNewSneaker (e){
+    var newSneakerName = document.getElementById('newSneakerName');
+    var newSneakerBrand = document.getElementById('newSneakerBrand');
+    e.preventDefault();
+    var newSneaker = {
+        id: sneakers.length + 1,
+        name: newSneakerName.value.toString(),
+        brand:  newSneakerBrand.value.toString(),
+    }
+    if(newSneaker.name === sneakers.name){
+        console.log('already added')
+    }else {
+        sneakers.push(newSneaker);
+    }
+    body.innerHTML = renderSneakers(sneakers);
 }
 
 var body = document.getElementById('sneakers');
@@ -61,4 +85,7 @@ submitButton.addEventListener('click', searchByBrand);
 var sneakerInput = document.getElementById('input-name');
 var searchByNameBtn = document.getElementById('name-btn');
 
-searchByNameBtn.addEventListener('click', searchByName);
+searchByNameBtn.addEventListener('keyup', searchByName);
+
+var newSneakerButton = document.getElementById('new-btn');
+newSneakerButton.addEventListener('click', addNewSneaker)
