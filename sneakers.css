@@ -7,9 +7,15 @@
     background-color: #4a8e61;
 }
 
+
 .center {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 100%;
+}
+
+.img{
+    height: 200px;
+    width: 250px;
 }
