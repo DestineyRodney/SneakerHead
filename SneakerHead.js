@@ -44,6 +44,12 @@ if(selectedBrand.value === 'All'){
     body.innerHTML = renderSneakers(filteredSneaker);
 }
 }
+function deleteObject(){
+    sneakers.shift();
+    console.log(sneakers);
+    body.innerHTML = renderSneakers(sneakers);
+
+}
 
 function searchByName () {
     var filterSneakers = [];
@@ -101,4 +107,7 @@ searchByNameBtn.addEventListener('click', searchByName);
 
 var sneakerImg = document.getElementById('sneakerimg');
 var newSneakerButton = document.getElementById('new-btn');
-newSneakerButton.addEventListener('click', addNewSneaker)
+newSneakerButton.addEventListener('click', addNewSneaker);
+
+var deleteBtn = document.getElementById('delete');
+deleteBtn.addEventListener('click', deleteObject )
